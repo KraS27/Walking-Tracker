@@ -29,5 +29,12 @@ namespace Walking_Tracker.Controllers
             var walks = await _walkService.GetWalksByDayAsync(date);
             return walks;
         }
+
+        [HttpGet("/walks/top")]
+        public async Task<BaseResponse<List<Walk>>> GetTopWalksAsync(int count)
+        {
+            var walks = await _walkService.GetTopWalksAsync(count);
+            return walks;
+        }
     }
 }

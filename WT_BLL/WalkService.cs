@@ -40,6 +40,26 @@ namespace WT_BLL
             }           
         }
 
+        public async Task<BaseResponse<List<Walk>>> GetTopWalksAsync(int count)
+        {
+            try
+            {
+                var tracks = await _trackRepository.GetAll().OrderBy(t => t.DateTrack).ToArrayAsync();
+                
+                return new BaseResponse<List<Walk>>
+                {                    
+                    Data = GetWalks(tracks).OrderByDescending(w => w.Distance).Take(count).ToList()
+                };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse<List<Walk>>
+                {
+                    Description = ex.Message
+                };
+            }
+        }
+
         public async Task<WalksByDayResponse> GetWalksByDayAsync(DateTime date)
         {
             try
