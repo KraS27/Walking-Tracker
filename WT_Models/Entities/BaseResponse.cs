@@ -8,7 +8,7 @@ namespace WT_Models.Entities
 {
     public class BaseResponse<T>
     {
-        public T Date { get; set; }
+        public T Data { get; set; }
 
         public string Description { get; set; }
     }

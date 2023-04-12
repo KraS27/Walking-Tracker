@@ -16,10 +16,17 @@ namespace Walking_Tracker.Controllers
             _walkService = walkService;
         }
 
-        [HttpGet("walk")]
+        [HttpGet("/walks")]
         public async Task<BaseResponse<List<Walk>>> GetWalksAsync()
         {
             var walks = await _walkService.GetAllWalksAsync();
+            return walks;
+        }
+
+        [HttpGet("/walks/date")]
+        public async Task<WalksByDayResponse> GetWalksByDayAsync(DateTime date)
+        {
+            var walks = await _walkService.GetWalksByDayAsync(date);
             return walks;
         }
     }
