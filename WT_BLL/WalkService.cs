@@ -37,7 +37,7 @@ namespace WT_BLL
                 {
                     Description = ex.Message
                 };
-            }           
+            }                   
         }
 
         public async Task<BaseResponse<List<Walk>>> GetTopWalksAsync(int count)
@@ -60,7 +60,7 @@ namespace WT_BLL
             }
         }
 
-        public async Task<WalksByDayResponse> GetWalksByDayAsync(DateTime date)
+        public async Task<WalksResponse> GetWalksByDayAsync(DateTime date)
         {
             try
             {
@@ -80,16 +80,17 @@ namespace WT_BLL
                     totalDayWalkTime += walk.Duration;
                 }
 
-                return new WalksByDayResponse
+                return new WalksResponse
                 {
                     Data = walks,
-                    TotalDayDistanceTraveled = totalDayWalkDistance,
-                    TotalDayTimeTraveled = totalDayWalkTime
+                    TotalDistanceTraveled = totalDayWalkDistance,
+                    TotalTimeTraveled = totalDayWalkTime,
+                    WalksCount = walks.Count()
                 };
             }
             catch (Exception ex)
             {
-                return new WalksByDayResponse
+                return new WalksResponse
                 {
                     Description = ex.Message
                 };
@@ -139,6 +140,43 @@ namespace WT_BLL
                 Math.Cos(lon1Double - lon2Double)) *
                 RADIUS_OF_EARTH;
             return distance;
-        }      
+        }
+
+        public async Task<WalksResponse> GetWalksByIMEIAsync(string IMEI)
+        {
+            try
+            {
+                var tracks = await _trackRepository.GetAll()
+                    .OrderBy(t => t.DateTrack)
+                    .Where(t => t.IMEI == IMEI)
+                    .ToArrayAsync();
+
+
+                var walks = GetWalks(tracks);
+                double totalWalkDistance = 0;
+                TimeSpan totalWalkTime = new TimeSpan();
+
+                foreach (var walk in walks)
+                {
+                    totalWalkDistance += walk.Distance;
+                    totalWalkTime += walk.Duration;
+                }
+
+                return new WalksResponse
+                {
+                    Data = null,
+                    TotalDistanceTraveled = totalWalkDistance,
+                    TotalTimeTraveled = totalWalkTime,
+                    WalksCount = walks.Count()
+                };
+            }
+            catch (Exception ex)
+            {
+                return new WalksResponse
+                {
+                    Description = ex.Message
+                };
+            }
+        }
     }
 }

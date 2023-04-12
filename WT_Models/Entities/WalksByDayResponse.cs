@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace WT_Models.Entities
 {
-    public class WalksByDayResponse : BaseResponse<List<Walk>>
+    public class WalksResponse : BaseResponse<List<Walk>>
     {
-        public double TotalDayDistanceTraveled { get; set; }
+        public double TotalDistanceTraveled { get; set; }
 
-        public TimeSpan TotalDayTimeTraveled { get; set; }
+        public TimeSpan TotalTimeTraveled { get; set; }
+
+        public int WalksCount { get; set; }
     }
 }

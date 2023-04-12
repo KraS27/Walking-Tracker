@@ -6,7 +6,9 @@ namespace WT_BLL
     {
         public Task<BaseResponse<List<Walk>>> GetAllWalksAsync();
 
-        public Task<WalksByDayResponse> GetWalksByDayAsync(DateTime date);
+        public Task<WalksResponse> GetWalksByDayAsync(DateTime date);
+
+        public Task<WalksResponse> GetWalksByIMEIAsync(string IMEI);
 
         public Task<BaseResponse<List<Walk>>> GetTopWalksAsync(int count);
     }

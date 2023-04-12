@@ -24,9 +24,16 @@ namespace Walking_Tracker.Controllers
         }
 
         [HttpGet("/walks/date")]
-        public async Task<WalksByDayResponse> GetWalksByDayAsync(DateTime date)
+        public async Task<WalksResponse> GetWalksByDayAsync(DateTime date)
         {
             var walks = await _walkService.GetWalksByDayAsync(date);
+            return walks;
+        }
+
+        [HttpGet("/walks/imei")]
+        public async Task<WalksResponse> GetWalksByIMEIAsync(string IMEI)
+        {
+            var walks = await _walkService.GetWalksByIMEIAsync(IMEI);
             return walks;
         }
 
@@ -36,5 +43,7 @@ namespace Walking_Tracker.Controllers
             var walks = await _walkService.GetTopWalksAsync(count);
             return walks;
         }
+
+
     }
 }
