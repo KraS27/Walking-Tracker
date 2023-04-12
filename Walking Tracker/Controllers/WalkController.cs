@@ -19,7 +19,7 @@ namespace Walking_Tracker.Controllers
         [HttpGet("walk")]
         public async Task<BaseResponse<List<Walk>>> GetWalksAsync()
         {
-            var walks = await _walkService.GetWalksAsync();
+            var walks = await _walkService.GetAllWalksAsync();
             return walks;
         }
     }

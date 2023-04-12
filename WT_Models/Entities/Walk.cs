@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 namespace WT_Models.Entities
 {
     public class Walk
-    {        
+    {
+        public double Distance { get; set; }
+
         public TimeSpan Duration { get; set; }
 
         public DateTime Start { get; set; }
