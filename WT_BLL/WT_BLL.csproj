@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WT_DAL\WT_DAL.csproj" />
+    <ProjectReference Include="..\WT_Models\WT_Models.csproj" />
+  </ItemGroup>
+
+</Project>
